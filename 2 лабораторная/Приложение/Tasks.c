@@ -10,11 +10,16 @@ struct options{
     int id;
 };
 
+struct package{
+    int r;
+    int teta;
+};
+
 //void ffdh(int T, int weight_line, struct options tasks[], int n, int m);
 //void nfdh(int T, int weight_line, struct options tasks[], int n, int m, int general_size[]);
 
 int main() {
-    int r_r = 0, t_t = 0, n = 0, m = 0, T = 0, weight_line = 0, alghoritm, currentElement = 0, maxT = 0, teta = 0;
+    int r_r = 0, t_t = 0, n = 0, m = 0, T = 0, weight_line = 0, alghoritm, currentElement = 0, maxT = 0, count_package = 1, r;
 
     printf("Введите количество ЭМ (n): ");
     scanf("%d", &n);
@@ -97,7 +102,14 @@ int main() {
 			printf("tasks[%d].r = %d\n", i, currentElement);
 		}
     }
-    printf("\n");
+
+    //Количество укрупненных задач
+    for (int i = 1; i < m; ++i) {
+        for (r = 0; r < i && tasks[i].r != tasks[r].r; ++r)
+            ;
+        count_package += (r == i);
+    }
+    printf("\nКоличество пакетов = %d\n", count_package);
 
     //Поиск максимального t
     maxT = tasks[0].t;
@@ -108,9 +120,11 @@ int main() {
     }
     printf("t максимальное = %d\n", maxT);
 
-    teta = 10 * maxT;
+    struct package bigOption[count_package];
 
-    printf("Ɵ = %d\n", teta);
+    bigOption.teta = 10 * maxT;
+
+    printf("Ɵ = %d\n", bigOption.teta);
 
     return 0;
 }
