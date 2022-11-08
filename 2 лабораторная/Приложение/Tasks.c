@@ -85,24 +85,6 @@ int main() {
     }
     printf("\n");
 
-    //Поиск повторов по полю r
-    for (int i = 0; i < m; i++) {
-		currentElement = tasks[i].r;
-		bool Equals = false;
-
-		for (int r = 0; r < m; ++r) {
-			if (i == r) {
-				continue;
-			}
-		    if (currentElement == tasks[r].r && i != r) {
-				Equals = true;
-			}
-        }
-		if (Equals) {
-			printf("tasks[%d].r = %d\n", i, currentElement);
-		}
-    }
-
     //Количество укрупненных задач
     for (int i = 1; i < m; ++i) {
         for (r = 0; r < i && tasks[i].r != tasks[r].r; ++r)
@@ -122,9 +104,33 @@ int main() {
 
     struct package bigOption[count_package];
 
-    bigOption.teta = 10 * maxT;
+    for (int i = 0; i < count_package; i++) {
+        bigOption[i].teta = 10 * maxT;
+    }
+    printf("Ɵ = %d\n\n", bigOption[0].teta);
 
-    printf("Ɵ = %d\n", bigOption.teta);
+    //Поиск повторов по полю r
+    for (int i = 0; i < m; i++) {
+		currentElement = tasks[i].r;
+		bool Equals = false;
+
+		for (int r = 0; r < m; ++r) {
+			if (i == r) {
+				continue;
+			}
+            if (currentElement != tasks[r].r && i != r) {
+				Equals = true;
+                //заносим в пакет
+			}
+		    if (currentElement == tasks[r].r && i != r) {
+				Equals = true;
+                //заносим в пакет
+			}
+        }
+		if (Equals) {
+			printf("tasks[%d].r = %d\n", i, currentElement);
+		}
+    }
 
     return 0;
 }
