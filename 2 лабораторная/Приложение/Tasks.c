@@ -94,7 +94,7 @@ int main() {
 			}
         }
 		if (Equals) {
-			printf("%d\n", currentElement);
+			printf("tasks[%d].r = %d\n", i, currentElement);
 		}
     }
     printf("\n");
@@ -110,7 +110,7 @@ int main() {
 
     teta = 10 * maxT;
 
-    printf("Тетта = %d\n", teta);
+    printf("Ɵ = %d\n", teta);
 
     return 0;
 }
