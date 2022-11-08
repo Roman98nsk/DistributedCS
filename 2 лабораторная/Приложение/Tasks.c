@@ -11,8 +11,8 @@ struct options{
 };
 
 struct package{
-    int r;
-    int teta;
+    int R;
+    int Teta;
 };
 
 //void ffdh(int T, int weight_line, struct options tasks[], int n, int m);
@@ -105,9 +105,9 @@ int main() {
     struct package bigOption[count_package];
 
     for (int i = 0; i < count_package; i++) {
-        bigOption[i].teta = 10 * maxT;
+        bigOption[i].Teta = 10 * maxT;
     }
-    printf("Ɵ = %d\n\n", bigOption[0].teta);
+    printf("Ɵ = %d\n\n", bigOption[0].Teta);
 
     //Поиск повторов по полю r
     for (int i = 0; i < m; i++) {
@@ -120,17 +120,19 @@ int main() {
 			}
             if (currentElement != tasks[r].r && i != r) {
 				Equals = true;
-                //заносим в пакет
+                bigOption[r].R = currentElement;
 			}
 		    if (currentElement == tasks[r].r && i != r) {
 				Equals = true;
-                //заносим в пакет
+                bigOption[r].R = currentElement;
 			}
         }
-		if (Equals) {
+		/*if (Equals) {
 			printf("tasks[%d].r = %d\n", i, currentElement);
-		}
+		}*/
+        printf("i = %d, r = %d, Ɵ = %d\n", i, bigOption[r].R, bigOption[0].Teta);
     }
+    printf("\n");
 
     return 0;
 }
