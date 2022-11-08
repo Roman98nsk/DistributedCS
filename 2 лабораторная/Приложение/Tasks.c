@@ -2,16 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 struct options{
     int r;
     int t;
     int id;
-};
-
-struct m{
-    int t;
-    int r;
 };
 
 //void ffdh(int T, int weight_line, struct options tasks[], int n, int m);
@@ -23,13 +19,11 @@ int main() {
     printf("Введите количество ЭМ (n): ");
     scanf("%d", &n);
 
-    //итоговая упаковка
     int general_size[n];
 
-    //массив одинаковых задач по полю r
     int same[same_size];
     
-    printf("Введите количество задач (m): ");
+    printf("Введите количеисво задач (m): ");
     scanf("%d", &m);
 
     struct options tasks[m];
@@ -37,7 +31,7 @@ int main() {
     srand(time(NULL));
     for (int i = 0; i < m; i++) {
         if (m < 5 || m > 5000) {
-            printf("Недопустимое значение для количества задач.\n");
+            printf("Неверное значение для количества задач.\n");
             return 0;
         } else {
             r_r = 1 + rand() % n;
@@ -87,57 +81,41 @@ int main() {
         printf("i = %d, n = %d, m = %d, r = %d, t = %d\n", tasks[i].id, n, m, tasks[i].r, tasks[i].t);
     }
 
-    /*for (int i = 0; i < m; i++) {
-        if (tasks[i].r == tasks[i + 1].r) {
-            if (same[counting - 1] == tasks[i].r) {
-                same[counting] = tasks[i + 1].r;
-                i++;
-            } else {
-                same_size += 2;
-                same[counting] = tasks[i].r;
-                same[counting + 1] = tasks[i + 1].r;
-                counting += 2;
-                printf("%d %d ", same[counting], same[counting + 1]);
-            }
-        }
-    }*/
 
-    for (int i = 0; i < m - 1; i++) {
-        for (int j = i + 1; j < m; j++) {
-            if (tasks[i].r == tasks[j].r) {
+    for (int i = 0; i < m; i++) {
+		int currentElement = tasks[i].r;
+		bool Equals = false;
 
-                    same_size += 2;
-                    same[counting] = tasks[i].r;
-                    same[counting + 1] = tasks[j].r;
-                    counting += 2;
-                    printf("%d %d \n", same[counting], same[counting + 1]);
-                }
-            }
-        }
-    
-
-return 0;
+		for (int r = 0; r < m; ++r) {
+			if (i == r) {
+				continue;
+			}
+		    if (currentElement == tasks[r].r && i != r) {
+				Equals = true;
+			}
+		}
+		if (Equals) {
+			printf("%d\n", currentElement);
+		}
+    }
+    return 0;
 }
-    /*printf("Введите название алгоритма упаковки: ");
-    scanf("%d", &alghoritm);
 
+ /*printf("Введите название алгоритма упаковки: ");
+    scanf("%d", &alghoritm);
     switch(alghoritm) {
         case 1:
             ffdh(T, weight_line, tasks, n, m);
             break;
-
         case 2:
             nfdh(T, weight_line, tasks, n, m, general_size);
             break;
     }
-
     return 0;
 }
-
 void ffdh(int T, int weight_line, struct options tasks[], int n, int m) {
     T = tasks[0].t; //поместили первый элемент
     weight_line = n - tasks[0].r; //посчитали остаток ширины
-
     for (int i = 1; i < m; i++) {
         if (tasks[i].r <= weight_line) {// если ширина прямоугольника меньше остатка, то помещаем еще прямоугольник
             weight_line -= tasks[i].r;
@@ -149,7 +127,6 @@ void ffdh(int T, int weight_line, struct options tasks[], int n, int m) {
     printf("\n(FFDH)Высота упаковки при n = %d равна %d\n", n, T);
     printf("(FFDH)Ширина упаковки при n = %d равна %d\n", n, weight_line);
 }
-
 void nfdh(int T, int weight_line, struct options tasks[], int n, int m, int general_size[]) {
     int allocate[m];
  
