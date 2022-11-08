@@ -14,14 +14,12 @@ struct options{
 //void nfdh(int T, int weight_line, struct options tasks[], int n, int m, int general_size[]);
 
 int main() {
-    int r_r = 0, t_t = 0, n = 0, m = 0, T = 0, weight_line = 0, alghoritm, counting = 0, same_size = 0;
+    int r_r = 0, t_t = 0, n = 0, m = 0, T = 0, weight_line = 0, alghoritm, currentElement = 0, maxT = 0, teta = 0;
 
     printf("Введите количество ЭМ (n): ");
     scanf("%d", &n);
 
     int general_size[n];
-
-    int same[same_size];
     
     printf("Введите количеисво задач (m): ");
     scanf("%d", &m);
@@ -80,10 +78,11 @@ int main() {
     for (int i = 0; i < m; i++) {
         printf("i = %d, n = %d, m = %d, r = %d, t = %d\n", tasks[i].id, n, m, tasks[i].r, tasks[i].t);
     }
+    printf("\n");
 
-
+    //Поиск повторов по полю r
     for (int i = 0; i < m; i++) {
-		int currentElement = tasks[i].r;
+		currentElement = tasks[i].r;
 		bool Equals = false;
 
 		for (int r = 0; r < m; ++r) {
@@ -93,11 +92,26 @@ int main() {
 		    if (currentElement == tasks[r].r && i != r) {
 				Equals = true;
 			}
-		}
+        }
 		if (Equals) {
 			printf("%d\n", currentElement);
 		}
     }
+    printf("\n");
+
+    //Поиск максимального t
+    maxT = tasks[0].t;
+    for (int i = 0; i < m; i++) {
+        if (tasks[i].t > maxT) {
+            maxT = tasks[i].t;
+        }
+    }
+    printf("t максимальное = %d\n", maxT);
+
+    teta = 10 * maxT;
+
+    printf("Тетта = %d\n", teta);
+
     return 0;
 }
 
