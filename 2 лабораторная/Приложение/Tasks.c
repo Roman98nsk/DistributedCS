@@ -110,7 +110,7 @@ int main() {
     printf("Ɵ = %d\n\n", bigOption[0].Teta);
 
     //Поиск повторов по полю r
-    for (int i = 0; i < m; i++) {
+    /*for (int i = 0; i < m; i++) {
 		currentElement = tasks[i].r;
 		bool Equals = false;
 
@@ -120,20 +120,35 @@ int main() {
 			}
             if (currentElement != tasks[r].r && i != r) {
 				Equals = true;
-                bigOption[r].R = currentElement;
 			}
 		    if (currentElement == tasks[r].r && i != r) {
 				Equals = true;
-                bigOption[r].R = currentElement;
 			}
         }
-		/*if (Equals) {
-			printf("tasks[%d].r = %d\n", i, currentElement);
-		}*/
-        printf("i = %d, r = %d, Ɵ = %d\n", i, bigOption[r].R, bigOption[0].Teta);
-    }
-    printf("\n");
 
+		if (Equals) {
+            printf("tasks[%d].r = %d\n\n", i, currentElement);
+        }
+    }*/
+    int repeat = 0;
+    int numarr = 0;
+    int bigoption = 0;
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < m; j++) {
+            if (tasks[numarr].r == tasks[j].r) {
+                repeat++;
+                bigOption[bigoption].R = tasks[numarr].r;
+            }
+        }
+        printf("%d повторилось %d раз\n", tasks[numarr].r, repeat);
+        repeat = 0;
+        numarr++;
+        bigoption++;
+    }
+    
+    for (int i = 0; i < count_package; i++) { 
+        printf("bigoption[%d]\n%d\n\n", i, bigOption[i].R);
+    }
     return 0;
 }
 
