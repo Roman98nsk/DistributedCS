@@ -10,10 +10,12 @@ struct options{
     int id;
 };
 
-struct package{
+typedef struct package{
+    int *ID;
     int R;
     int Teta;
-};
+    
+} Stack_t;
 
 //void ffdh(int T, int weight_line, struct options tasks[], int n, int m);
 //void nfdh(int T, int weight_line, struct options tasks[], int n, int m, int general_size[]);
@@ -109,6 +111,8 @@ int main() {
     }
     printf("Ɵ = %d\n\n", bigOption[0].Teta);
 
+
+
     //Поиск повторов по полю r
     /*for (int i = 0; i < m; i++) {
 		currentElement = tasks[i].r;
@@ -130,6 +134,7 @@ int main() {
             printf("tasks[%d].r = %d\n\n", i, currentElement);
         }
     }*/
+    /*
     int repeat = 0;
     int numarr = 0;
     int bigoption = 0;
@@ -138,18 +143,28 @@ int main() {
             if (tasks[numarr].r == tasks[j].r) {
                 repeat++;
                 bigOption[bigoption].R = tasks[numarr].r;
+                
             }
         }
         printf("%d повторилось %d раз\n", tasks[numarr].r, repeat);
+        printf("Ширина R пакета [%d] = %d,\tвысота Ɵ пакета [%d] = %d\n\n", bigoption, bigOption[bigoption].R, bigoption, bigOption[0].Teta);
         repeat = 0;
         numarr++;
         bigoption++;
-    }
-    
-    for (int i = 0; i < count_package; i++) { 
-        printf("bigoption[%d]\n%d\n\n", i, bigOption[i].R);
-    }
+    }*/
+
     return 0;
+}
+
+Stack_t* createStack() {
+    Stack_t *out = NULL;
+
+    out = malloc (sizeof(Stack_t));
+    if (out == NULL) {
+        exit(-1);
+    }
+
+    out -> size = 10;
 }
 
  /*printf("Введите название алгоритма упаковки: ");
